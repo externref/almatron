@@ -21,6 +21,8 @@
 		"@tailwindcss/forms": "^0.5.9",
 		"@tailwindcss/typography": "^0.5.15",
 		"@tailwindcss/vite": "^4.0.0",
+		"@types/bcryptjs": "^3.0.0",
+		"@types/nodemailer": "^6.4.17",
 		"@types/pg": "^8.11.11",
 		"bootstrap-icons": "^1.11.3",
 		"font-awesome-icons": "^1.6.0",
@@ -34,6 +36,10 @@
 	},
 	"dependencies": {
 		"@selemondev/svelte-marquee": "^0.0.3",
-		"pg": "^8.14.1"
+		"bcryptjs": "^3.0.2",
+		"nodemailer": "^6.10.0",
+		"pg": "^8.14.1",
+		"uuid": "^11.1.0",
+		"zod": "^3.24.2"
 	}
 }

@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://github.com/yourusername/mealbridge/raw/main/assets/logo.png" alt="MealBridge Logo" width="200">
-</p>
-
 # MealBridge
 
 MealBridge is a platform that connects people who want to donate food with those in need. Whether you're an individual, a restaurant, or an organization, you can use MealBridge to donate food or contribute financially to support food distribution efforts.
@@ -19,17 +15,17 @@ Together, we can create a world where no meal goes to waste, and no one goes hun
 
 ## ✨ Features
 
--  **Simple Food Donation Process** – Easily list food items with location and availability.
--  **Connects Donors with Shelters & NGOs** – Ensures food reaches verified organizations and individuals.
--  **Real-time Updates** – Get notified about available food and pickup requests.
--  **Reduces Food Waste** – Supports sustainability by preventing edible food from going to waste.
--  **Safe & Verified Transactions** – Ensures food safety guidelines and secure connections.
+- **Simple Food Donation Process** – Easily list food items with location and availability.
+- **Connects Donors with Shelters & NGOs** – Ensures food reaches verified organizations and individuals.
+- **Real-time Updates** – Get notified about available food and pickup requests.
+- **Reduces Food Waste** – Supports sustainability by preventing edible food from going to waste.
+- **Safe & Verified Transactions** – Ensures food safety guidelines and secure connections.
 
 ## 🎯 Why MealBridge?
 
--  Helps fight hunger by making food donations more accessible.
--  Supports sustainability by minimizing food waste.
--  Encourages community-driven social impact.
+- Helps fight hunger by making food donations more accessible.
+- Supports sustainability by minimizing food waste.
+- Encourages community-driven social impact.
 
 ## 📌 Get Involved
 
@@ -37,12 +33,6 @@ Together, we can create a world where no meal goes to waste, and no one goes hun
 - **NGOs & Shelters:** Register to receive food donations.
 - **Volunteers:** Help with food collection and distribution.
 
-## 📞 Contact Us
-
-[Website](https://www.mealbridge.com)  
-[Email](mailto:info@mealbridge.com)  
-[Twitter](https://twitter.com/mealbridge)  
-[Instagram](https://instagram.com/mealbridge)
 
 ## 📄 License
 

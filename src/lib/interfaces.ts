@@ -12,3 +12,14 @@ export interface FoodItem {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export interface User {
+	name: string;
+	id: string;
+	username: string;
+	email: string;
+	phone: string;
+	location: string;
+	password: string;
+	createdAt: string;
+}

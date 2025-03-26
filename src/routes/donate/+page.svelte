@@ -1,4 +1,17 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
+	import type { ActionData } from './$types';
+
+	export let form: ActionData;
+
+	function _a(form: ActionData) {
+		if (form?.success) {
+			goto('/');
+		}
+	}
+	$: x = _a(form);
+
 	export let foodname: string = '';
 	export let description: string = '';
 	export let location: string = '';
@@ -649,16 +662,31 @@
 		'Uttar Dinajpur'
 	].sort();
 
+	let submitting = false;
+	let errorMessage = '';
+
+	function handleSubmit() {
+		submitting = true;
+		errorMessage = '';
+		// @ts-ignore
+		return ({ result, update }) => {
+			submitting = false;
+
+			if (result.type === 'failure') {
+				errorMessage = result.data?.error || 'Something went wrong';
+			}
+
+			update();
+		};
+	}
+
 	function handleImageUpload(event: Event) {
 		const input = event.target as HTMLInputElement;
 		if (input.files && input.files[0]) {
 			const file = input.files[0];
 			imageFile = file;
-
-			// Create preview URL
 			imagePreview = URL.createObjectURL(file);
 
-			// Clean up the preview URL when component is destroyed
 			return () => {
 				if (imagePreview) URL.revokeObjectURL(imagePreview);
 			};
@@ -669,23 +697,38 @@
 <div>
 	<p class="text-4xl text-center">Donate Food Item</p>
 	<div class="h-[1.5px] bg-catp-overlay0 mx-12 my-2"></div>
-	<form>
+
+	{#if errorMessage}
+		<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mx-8 mb-4">
+			<span class="block sm:inline">{errorMessage}</span>
+		</div>
+	{/if}
+
+	<form method="POST" use:enhance={handleSubmit} enctype="multipart/form-data">
 		<div class="grid grid-cols-2 gap-6 m-8">
 			<div>
-				<label class="text-black text-base ml-2 mb-0.5" for="_name">Food Name</label><br />
+				<label class="text-black text-base ml-2 mb-0.5" for="_name"
+					>Food Name <span class="text-red-500">*</span></label
+				><br />
 				<input
 					id="_name"
+					name="foodname"
 					bind:value={foodname}
 					placeholder="Food Item name"
+					required
 					class="p-2 border-2 border-orange-500/30 rounded-lg w-full focus:outline-none focus:border-orange-500/60 focus:ring-2 focus:ring-orange-500/30 transition-all duration-200"
 				/>
 			</div>
 
 			<div>
-				<label class="text-black text-base ml-2 mb-0.5" for="_location">Location</label><br />
+				<label class="text-black text-base ml-2 mb-0.5" for="_location"
+					>Location <span class="text-red-500">*</span></label
+				><br />
 				<select
 					id="_location"
+					name="location"
 					bind:value={location}
+					required
 					class="p-2 border-2 border-orange-500/30 rounded-lg w-full focus:outline-none focus:border-orange-500/60 focus:ring-2 focus:ring-orange-500/30 transition-all duration-200"
 				>
 					<option value="">Select a district</option>
@@ -699,6 +742,7 @@
 				<label class="text-black text-base ml-2 mb-0.5" for="_description">Description</label><br />
 				<textarea
 					id="_description"
+					name="description"
 					bind:value={description}
 					placeholder="Describe the food item"
 					class="p-2 border-2 border-orange-500/30 rounded-lg w-full focus:outline-none focus:border-orange-500/60 focus:ring-2 focus:ring-orange-500/30 transition-all duration-200"
@@ -707,12 +751,15 @@
 			</div>
 
 			<div>
-				<label class="text-black text-base ml-2 mb-0.5" for="_expirationDate">Expiration Date</label
+				<label class="text-black text-base ml-2 mb-0.5" for="_expirationDate"
+					>Expiration Date <span class="text-red-500">*</span></label
 				><br />
 				<input
 					id="_expirationDate"
+					name="expirationDate"
 					type="date"
 					bind:value={expirationDate}
+					required
 					class="p-2 border-2 border-orange-500/30 rounded-lg w-full focus:outline-none focus:border-orange-500/60 focus:ring-2 focus:ring-orange-500/30 transition-all duration-200"
 				/>
 			</div>
@@ -722,6 +769,7 @@
 				><br />
 				<input
 					id="_quantity"
+					name="quantity"
 					type="range"
 					bind:value={quantity}
 					min="1"
@@ -750,6 +798,7 @@
 					{/if}
 					<input
 						id="_image"
+						name="imageFile"
 						type="file"
 						accept="image/*"
 						on:change={handleImageUpload}
@@ -763,9 +812,10 @@
 		<div class="flex justify-center mb-8">
 			<button
 				type="submit"
-				class="bg-orange-500/80 hover:bg-orange-500/90 text-white font-bold py-2 px-8 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2"
+				disabled={submitting}
+				class="bg-orange-500/80 hover:bg-orange-500/90 text-white font-bold py-2 px-8 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
 			>
-				Submit Donation
+				{submitting ? 'Submitting...' : 'Submit Donation'}
 			</button>
 		</div>
 	</form>
