@@ -1,8 +1,11 @@
 <script lang="ts">
+	import Header from '$lib/components/Header.svelte';
 	import '../app.css';
 
 	let { children } = $props();
 </script>
 
-<div class="m-4">{@render children()}</div>
-
+<Header></Header>
+<div class="m-4">
+	{@render children()}
+</div>

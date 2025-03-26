@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
-@import "./catp.css";
+@import './catp.css';
 
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
